@@ -1,0 +1,264 @@
+-- Script lista de exercicios 14 de junho de 2024 --
+-- Nomes: Juliano Mancini; Monise Jacheta --
+
+-- Exercicio 01 --
+
+select * from regions;
+
+-- Exercicio 02 --
+
+select * from countries;
+
+-- Exercicio 03 --
+
+select
+        regions.region_id,
+        regions.region_name,
+        countries.country_id,
+        countries.country_name,
+        countries.population,
+        countries.currency_code,
+        countries.capitol
+    from countries
+    inner join regions on regions.region_id = countries.region_id;
+
+-- Exercicio 04 --
+
+select 
+       countries.country_id,
+       countries.country_name,
+       regions.region_id
+
+    from countries 
+    inner join regions  on countries.region_id = regions.region_id;
+
+-- Exercicio 05 --
+
+select
+        a.region_id,
+        a.region_name,
+        b.country_id,
+        b.country_name,
+        b.population,
+        b.currency_code,
+        b.capitol
+    from countries b
+    inner join regions a on a.region_id = b.region_id;
+
+-- Exercicio 06 --
+
+select
+        a.region_id,
+        region_name,
+        country_id,
+        country_name,
+        population,
+        currency_code,
+        capitol
+    from countries b
+    inner join regions a on a.region_id = b.region_id;
+
+-- Exercicio 07 --
+
+select 
+    min (population),
+    max (population)
+    from countries;
+
+-- Exercicio 08 -- 
+
+update countries
+    set population = 40000
+where population = 0;
+
+-- Somando a população de todos os paises cadastrados --
+select 
+    sum (population)
+from countries;
+
+-- Somando o total de todas as areas cadastradas --
+select
+    sum (area)
+from countries;
+
+-- tirando a média de população por pais --
+select
+    sum (population),
+    count (country_id),
+    (sum(population) / count (country_id)) as media
+from countries;
+
+-- tirando a média da população pela area --
+select
+    sum (population),
+    count (area),
+    (sum(population)/count (area)) as media
+    from countries;
+
+-- Exercicio 09 --
+
+select
+    (sum (population)/5) as faixa
+    from countries;
+
+-- Cada faixa possui aproximadamente 1.302.328.707 de pessoas --
+-- Faixa 01 - 0 até 1.302.328.707
+-- Faixa 02 - 1.302.328.708 até 2.604.657.415
+-- Faixa 03 - 2.604.657.416 até 3.906.986.122 
+-- Faixa 04 - 3.906.986.123 até 5.209.314.830
+-- Faixa 05 - 5.209.314.830 até 6.511.643.558
+
+-- Exercicio 10 --
+
+select population,
+       country_name,
+       country_id     
+       from countries
+    where population between 0 and 1302328707;
+
+-- Exercicio 11 --
+
+select population,
+       country_name,
+       country_id     
+       from countries
+    where population between 1302328708 and 2604657415;
+
+-- Exercicio 12 --
+
+select population,
+       country_name,
+       country_id     
+       from countries
+    where population between 2604657416 and 3906986122;
+
+-- Exercicio 13 --
+
+select population,
+       country_name,
+       country_id     
+       from countries
+    where population between 3906986123 and 5209314830;
+
+-- Exercicio 14 --
+
+select population,
+       country_name,
+       country_id     
+       from countries
+    where population between 5209314830 and 6511643558;
+
+-- Exercicio 15 --
+
+select 
+    0 as faixa_inicio,
+    1302328707 as faixa_final,
+    count (population) as qtd_country_faixa
+    from countries
+    where population between 0 and 1302328707
+
+union
+select 
+    1302328708 as faixa02_inicio,
+    2604657415 as faixa02_final,
+    count (population) as qtd_country_faixa
+    from countries
+    where population between 1302328708 and 2604657415
+
+union
+select 
+    2604657416 as faixa03_inicio,
+    3906986122 as faixa03_final,
+    count (population) as qtd_country_faixa
+    from countries
+    where population between 2604657416 and 3906986122
+
+union
+select 
+    3906986123 as faixa04_inicio,
+    5209314830 as faixa04_final,
+    count (population) as qtd_country_faixa
+    from countries
+    where population between 3906986123 and 5209314830
+
+union
+select 
+    5209314831 as faixa05_inicio,
+    6511643558 as faixa05_final,
+    count (population) as qtd_country_faixa
+    from countries
+    where population between 5209314831 and 6511643558;
+
+-- Exercicio 16 --
+
+select
+    region_name,
+    region_id
+from regions
+where region_name like '%Asia%';
+
+    
+update countries
+    set population = population * 1.15
+    where region_id in (30,34,35,145,143) ;
+
+-- Exercicio 17 --
+
+select * from regions
+where region_name like '%Africa%';
+
+update countries
+    set population = population * 1.13
+    where region_id in (14,17,15,18,11);
+
+-- Exercicio 18 --
+
+select * from regions
+where region_name like '%Oceania%';
+
+update countries
+    set population = population * 1.03
+    where region_id in (9);
+
+-- Exercicio 19 --
+
+select * from regions
+where region_name like '%Caribbean%';
+
+update countries
+    set population = population * 1.015
+    where region_id in (29);
+
+-- Exercicio 20 --
+
+select * from regions
+where region_name like '%America%';
+
+update countries
+    set population = population * 1.05
+    where region_id in (13,5);
+
+-- Exercicio 21 --
+
+select * from regions
+where region_name like '%America%';
+
+update countries
+    set population = population * 1.005
+    where region_id in (21);
+
+-- Exercicio 22 --
+
+select * from regions
+where region_name like '%Europe%';
+
+update countries
+    set population = population * 0.99
+    where region_id in (151,154,39,155);
+
+-- Exercicio 23 --
+
+-- Exercicio 24 --
+
+-- Para excluir uma tabela, primeiro é necessário remover todos os dados que estão inseridos nessa tabela, e precisa tambem
+-- excluir primeiramente todos os dados da tabela dependente e a tabela dependente em si.

@@ -1,0 +1,9 @@
+select * from REGIONS order by REGION_NAME; -- * - Seleciona todas as colunas da tabela || from - seleciona a tabela || Order by - ordena pelo atributo selecionada 
+                                            -- para rodar somente uma linha, seleciona ela com o mouse e clica em RUN com a linha selecionada
+Select  a.COUNTRY_ID,
+        a.REGION_ID,
+        a.COUNTRY_NAME,
+        b.REGION_NAME
+from COUNTRIES a
+inner join REGIONS b on a.REGION_ID = b.REGION_ID -- inner join - intersecção de informações comuns entre duas tabelas diferentes
+order by a.COUNTRY_ID asc ; -- ASC = ascendente [padrão] || DESC = Descendente
